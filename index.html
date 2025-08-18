@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagar Chand Agarwal - CTO & Technical Leader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+        
+        /* Experience */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #2563eb;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .role-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .company {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        
+        .duration {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .achievements {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .achievements li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .achievements li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2563eb;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: #e2e8f0;
+            color: #475569;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .project-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Contact */
+        .contact {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #475569;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Sagar Chand Agarwal</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Chief Technology Officer<br>& Technical Leader</h1>
+                <p class="subtitle">Building scalable distributed systems, leading technical teams, and driving innovation in fintech</p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">10GB+</span>
+                        <span class="stat-label">Data Processed Daily</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Team Members Led</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">₹2Cr+</span>
+                        <span class="stat-label">Business Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">About</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: #475569;">
+            <p>Technical leader with 8+ years building distributed systems and scaling engineering teams. From GSoC contributor to CTO, I specialize in system design, DevOps architecture, and ML/AI implementation. Currently leading a 15-member team at BeyondIRR, where I've architected multi-cloud infrastructure processing 10GB+ daily data and drove ₹2+ crores in new business.</p>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-grid">
+            <div class="experience-item fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="role-title">Chief Technology Officer</div>
+                        <div class="company">BeyondIRR</div>
+                    </div>
+                    <div class="duration">Mar 2024 - Present</div>
+                </div>
+                <ul class="achievements">
+                    <li>Scaled engineering team from 2 to 15 members through strategic hiring and technical leadership</li>
+                    <li>Architected multi-cloud DevOps infrastructure (AWS, GCP, Azure, on-prem) supporting 5+ production clients</li>
+                    <li>Implemented AI-powered ETL systems processing 10GB+ daily mutual fund and stock data</li>
+                    <li>Led ISO 27001 compliance, VAPT, and DPDP Act adherence initiatives</li>
+                    <li>Deployed LLM and Agentic AI solutions for portfolio management and customer chatbots</li>
+                </ul>
+            </div>
+
+            <div class="experience-item fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="role-title">Engineering Lead</div>
+                        <div class="company">BeyondIRR</div>
+                    </div>
+                    <div class="duration">Apr 2022 - Mar 2024</div>
+                </div>
+                <ul class="achievements">
+                    <li>Led development of InvestLane product for multi-sector investment management</li>
+                    <li>Built scalable backend systems using Python, FastAPI, and Apache Airflow</li>
+                    <li>Designed and implemented data pipeline architecture for financial data processing</li>
+                    <li>Established technical standards and code review processes</li>
+                </ul>
+            </div>
+
+            <div class="experience-item fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="role-title">Lead Technical Consultant</div>
+                        <div class="company">Info Fractals</div>
+                    </div>
+                    <div class="duration">Mar 2021 - Apr 2022</div>
+                </div>
+                <ul class="achievements">
+                    <li>Led backend development for AccelerList.com marketplace integrations</li>
+                    <li>Implemented eBay and Amazon API integrations handling thousands of daily transactions</li>
+                    <li>Developed automated printer support systems for label generation</li>
+                    <li>Built scalable APIs using FastAPI and GraphQL</li>
+                </ul>
+            </div>
+
+            <div class="experience-item fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="role-title">Software Consultant</div>
+                        <div class="company">Info Fractals</div>
+                    </div>
+                    <div class="duration">Jun 2017 - Mar 2021</div>
+                </div>
+                <ul class="achievements">
+                    <li>Developed Looped Housing: UK property price aggregator with data scraping capabilities</li>
+                    <li>Built recruitment software for energy companies as lead backend engineer</li>
+                    <li>Created Learning Management System (LMS) serving multiple educational institutions</li>
+                    <li>Developed fintech software for cost/revenue analysis and hiring forecasts</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Languages & Frameworks</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">Rust</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">Flask</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Node.js</span>
+                </div>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>Data & Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Apache Airflow</span>
+                    <span class="skill-tag">Elasticsearch</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">NoSQL</span>
+                    <span class="skill-tag">ETL Pipelines</span>
+                    <span class="skill-tag">Data Scraping</span>
+                    <span class="skill-tag">GraphQL</span>
+                </div>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>DevOps & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">Azure</span>
+                    <span class="skill-tag">Multi-Cloud Architecture</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Distributed Systems</span>
+                    <span class="skill-tag">System Design</span>
+                </div>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>AI & Machine Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">LLM Integration</span>
+                    <span class="skill-tag">Agentic AI</span>
+                    <span class="skill-tag">Decision Trees</span>
+                    <span class="skill-tag">Logistic Regression</span>
+                    <span class="skill-tag">Resume Parsing</span>
+                    <span class="skill-tag">Predictive Analytics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-content">
+                    <h3 class="project-title">InvestLane Platform</h3>
+                    <p class="project-description">Comprehensive investment management platform enabling multi-sector investments with real-time data processing and portfolio optimization.</p>
+                    <strong>Impact:</strong> Serving 5+ production clients, ₹50L per client value
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Apache Airflow</span>
+                        <span class="tech-tag">Multi-Cloud</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-content">
+                    <h3 class="project-title">Looped Housing</h3>
+                    <p class="project-description">UK property price aggregator providing comprehensive property scoring and market analysis for sellers and buyers.</p>
+                    <strong>Role:</strong> Full-stack development and data architecture
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Data Scraping</span>
+                        <span class="tech-tag">React.js</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-content">
+                    <h3 class="project-title">AccelerList Integration</h3>
+                    <p class="project-description">Marketplace integration platform connecting eBay and Amazon with automated label printing and inventory management.</p>
+                    <strong>Achievement:</strong> Processed thousands of daily transactions
+                    <div class="project-tech">
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">GraphQL</span>
+                        <span class="tech-tag">API Integration</span>
+                        <span class="tech-tag">Automation</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card fade-in">
+                <div class="project-content">
+                    <h3 class="project-title">GCompris GSoC</h3>
+                    <p class="project-description">Open-source contribution porting educational activities from GTK to Qt QML with JavaScript for KDE's GCompris project.</p>
+                    <strong>Organization:</strong> KDE (Google Summer of Code 2015)
+                    <div class="project-tech">
+                        <span class="tech-tag">Qt QML</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Open Source</span>
+                        <span class="tech-tag">KDE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title" style="color: white;">Let's Connect</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Ready to discuss distributed systems, technical leadership, or potential collaborations?</p>
+                
+                <div class="contact-links">
+                    <a href="mailto:atomsagar@gmail.com" class="contact-link">Email</a>
+                    <a href="https://linkedin.com/in/sagarchandagarwal" class="contact-link">LinkedIn</a>
+                    <a href="https://github.com/sagarchandagarwal" class="contact-link">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add active nav link highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.style.color = '#64748b';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = '#2563eb';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
