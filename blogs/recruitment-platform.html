@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Modern Talent Intelligence Platform — A System Architecture Deep Dive</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111111;
+    --bg: #fafaf8;
+    --accent: #1a6b3a;
+    --accent-light: #e8f5ee;
+    --accent2: #b84a1e;
+    --muted: #6b6560;
+    --rule: #e2ddd8;
+    --code-bg: #16201a;
+    --max: 740px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  /* ── SUBSTACK COVER PREVIEW ── */
+  .cover-preview {
+    background: #0a0f0a;
+    padding: 50px 30px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(26,107,58,0.04) 40px, rgba(26,107,58,0.04) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(26,107,58,0.04) 40px, rgba(26,107,58,0.04) 41px);
+  }
+  .cover-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .cover-h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    max-width: 820px;
+    margin: 0 auto 14px;
+    position: relative;
+  }
+  .cover-h1 em { color: var(--accent); font-style: italic; }
+  .cover-sub {
+    font-size: 16px;
+    color: #778;
+    max-width: 600px;
+    margin: 14px auto 0;
+    position: relative;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .cover-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 22px auto 0;
+    position: relative;
+  }
+
+  /* ── SUBSTACK NOTICE BAND ── */
+  .substack-notice {
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .substack-notice a { color: #a8e6c0; text-decoration: none; }
+
+  /* ── ARTICLE BODY ── */
+  .article-body {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 60px 30px 80px;
+  }
+
+  /* Meta line */
+  .post-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 18px;
+    margin-bottom: 40px;
+  }
+  .post-meta span { color: var(--ink); font-weight: 500; }
+
+  /* Lead paragraph */
+  .lead {
+    font-family: 'Lora', serif;
+    font-size: 21px;
+    line-height: 1.65;
+    color: #222;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  p { margin-bottom: 22px; }
+
+  /* Headings */
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 54px 0 18px;
+    padding-top: 54px;
+    border-top: 1.5px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  h2 .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  h3 {
+    font-family: 'Lora', serif;
+    font-size: 21px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    margin: 36px 0 12px;
+  }
+
+  /* Inline code */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    background: #eef5f0;
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  /* Image figure */
+  figure {
+    margin: 36px -30px;
+  }
+  figure img {
+    width: 100%;
+    display: block;
+    max-height: 420px;
+    object-fit: cover;
+  }
+  figcaption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 10px 30px 0;
+    letter-spacing: 0.3px;
+  }
+
+  /* Architecture diagram */
+  .arch {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 26px;
+    margin: 28px 0;
+    overflow-x: auto;
+  }
+  .arch-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .layer-row {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 8px;
+    gap: 10px;
+    min-width: 560px;
+  }
+  .lr-label {
+    width: 120px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .lr-inner {
+    flex: 1;
+    background: #fafafa;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .lr-inner.hi { border-color: var(--accent); border-width: 2px; background: var(--accent-light); }
+  .badge {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: #333;
+    white-space: nowrap;
+  }
+  .badge.g { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .badge.d { background: var(--ink); color: #eee; border-color: var(--ink); }
+
+  /* Flow diagram */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 24px 0;
+    padding: 18px 0;
+    overflow-x: auto;
+  }
+  .fn {
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    padding: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-align: center;
+    min-width: 100px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .fn.g { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .fn.d { background: var(--ink); color: #eee; }
+  .fa { font-size: 16px; color: var(--muted); flex-shrink: 0; margin: 0 4px; font-family: monospace; }
+
+  /* Code block */
+  .code-wrap {
+    background: var(--code-bg);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  .code-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #c9d1d9;
+  }
+  .k { color: #cba6f7; }
+  .s { color: #a6e3a1; }
+  .nm { color: #fab387; }
+  .ky { color: #89dceb; }
+  .cm { color: #4a5568; font-style: italic; }
+
+  /* Callout */
+  .callout {
+    background: var(--ink);
+    color: #e0e0e0;
+    padding: 26px 30px;
+    border-radius: 3px;
+    margin: 32px 0;
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    line-height: 1.65;
+    font-style: italic;
+    position: relative;
+  }
+  .callout::before {
+    content: '\201C';
+    font-size: 120px;
+    color: #ffffff06;
+    position: absolute;
+    top: -10px; left: 14px;
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .callout p { color: inherit; margin: 0; position: relative; z-index: 1; }
+
+  /* Info grid */
+  .ig {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .ic {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 18px;
+  }
+  .ic h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .ic ul { list-style: none; }
+  .ic li {
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 5px 0;
+    border-bottom: 1px solid #f5f5f5;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .ic li:last-child { border-bottom: none; }
+  .ic li::before { content: '→'; color: var(--accent); font-size: 11px; }
+
+  /* Divider */
+  .div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 46px 0 24px;
+  }
+  .div-l { flex: 1; height: 1px; background: var(--rule); }
+  .div-t {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SUBSTACK COPY FORMAT (plain text export box) ── */
+  .export-section {
+    background: #fff;
+    border: 2px dashed var(--rule);
+    border-radius: 4px;
+    padding: 30px;
+    margin-top: 60px;
+  }
+  .export-section h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-style: normal;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .copy-btn {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .copy-btn:hover { background: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: #555;
+    text-align: center;
+    padding: 36px 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 2;
+  }
+  footer strong { color: #888; }
+
+  @media (max-width: 640px) {
+    figure { margin: 28px 0; }
+    .ig { grid-template-columns: 1fr; }
+    h2 { font-size: 24px; }
+    .cover-h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- ── COVER ── -->
+<div class="cover-preview">
+  <div class="cover-tag">Engineering · System Design · Cloud Architecture</div>
+  <h1 class="cover-h1">Building a Modern<br><em>Talent Intelligence</em> Platform</h1>
+  <p class="cover-sub">A complete architectural deep dive — layers, deployment, auth, and the full tech stack</p>
+  <div class="cover-divider"></div>
+</div>
+<!-- ── ARTICLE ── -->
+<div class="article-body">
+
+  <div class="post-meta">
+    <div>Topic <span>System Architecture</span></div>
+    <div>Category <span>Engineering Deep Dive</span></div>
+    <div>Read time <span>~8 min</span></div>
+    <div>Format <span>Technical Blog</span></div>
+  </div>
+
+  <p class="lead">What does the architecture of a production-grade talent intelligence platform actually look like? This post breaks it down layer by layer — from the user-facing channels all the way to containerized cloud infrastructure — covering the key design decisions that make such a system scalable, maintainable, and extensible.</p>
+
+  <p>Modern talent platforms face a unique intersection of engineering challenges: high-cardinality search across millions of candidate profiles, real-time recruiter dashboards, multi-channel data ingestion from ATS systems and social platforms, and the need to match job descriptions against resumes with semantic precision. The architecture we'll walk through addresses all of these concerns through deliberate, opinionated design choices.</p>
+
+  <!-- §1 -->
+  <h2 id="overview"><span class="n">01 —</span> Application Architecture Overview</h2>
+
+  <p>The platform is structured around four clean horizontal layers. Each layer builds strictly on the one below, with higher layers consuming services provided by lower ones — a discipline that keeps domain logic separate from shared infrastructure.</p>
+
+  <div class="arch">
+    <div class="arch-title">Application Architecture — Layer View</div>
+
+    <div class="layer-row">
+      <div class="lr-label">Channels</div>
+      <div class="lr-inner">
+        <span class="badge">Web</span>
+        <span class="badge">Mobile</span>
+        <span class="badge">APIs</span>
+        <span class="badge">RSS Feeds</span>
+        <span class="badge">Applications</span>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="lr-label" style="flex-direction:column;align-items:flex-start;gap:2px;"><span>App</span><span>Services</span></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+        <div class="lr-inner">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#aaa;margin-right:6px;">Platform-Specific</span>
+          <span class="badge">User Mgmt</span>
+          <span class="badge">JD Library</span>
+          <span class="badge">Recruiter Dashboard</span>
+          <span class="badge">Executive Dashboard</span>
+          <span class="badge">Industry Taxonomy</span>
+        </div>
+        <div class="lr-inner hi">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--accent);margin-right:6px;">Reusable</span>
+          <span class="badge g">Taxonomy Manager</span>
+          <span class="badge g">Connectors</span>
+          <span class="badge g">Self-Registration</span>
+          <span class="badge g">Profiles</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="lr-label" style="flex-direction:column;align-items:flex-start;gap:2px;"><span>Common</span><span>Services</span></div>
+      <div class="lr-inner">
+        <span class="badge">User Mgmt</span>
+        <span class="badge">Authentication</span>
+        <span class="badge">Gamification</span>
+        <span class="badge">Data Export</span>
+        <span class="badge">Background Jobs</span>
+        <span class="badge">Notifications</span>
+        <span class="badge">Integrations</span>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="lr-label" style="flex-direction:column;align-items:flex-start;gap:2px;"><span>Common</span><span>Infra</span></div>
+      <div class="lr-inner">
+        <span class="badge d">ElasticSearch</span>
+        <span class="badge d">Logging</span>
+        <span class="badge d">Performance</span>
+        <span class="badge d">Infrastructure</span>
+        <span class="badge d">Docker</span>
+        <span class="badge d">Hosting (AWS / Azure)</span>
+      </div>
+    </div>
+  </div>
+
+  <p>A critical design decision is the explicit split within Application Services between <em>platform-specific components</em> and <em>reusable components</em> (highlighted above). Taxonomy Manager, Connectors, Self-Registration, and Profiles are architected as standalone, reusable building blocks — meaning they could be extracted and deployed in a different product context without modification.</p>
+
+  <div class="div"><div class="div-l"></div><div class="div-t">Technical Stack</div><div class="div-l"></div></div>
+
+  <!-- §2 -->
+  <h2 id="technical"><span class="n">02 —</span> Technical Architecture</h2>
+
+  <p class="lead" style="font-size:19px;">At the core sits a Flask-based application server, Elasticsearch serving as both search engine and primary database, and a pluggable resume/job description parsing engine.</p>
+
+  <figure>
+    <img src="https://assets-global.website-files.com/620d42e86cb8ec4d0839e59d/620d42e86cb8ec4d0839e613_5f21b7be9cbbfe23dd0e5558_hranalytics-p-1080.jpeg" alt="Talent platform analytics dashboard" onerror="this.style.display='none'"/>
+    <figcaption>▲ Real-time analytics dashboards power recruiter and executive decision-making</figcaption>
+  </figure>
+
+  <h3>The Application Server</h3>
+  <p>A Flask app serves as the central integration hub — handling all business logic, connecting outward to external systems (LinkedIn, Taleo, Jobscience and others), and downward to Elasticsearch for data persistence. The architecture is intentionally modular: the parser integration layer is explicitly marked <em>Replaceable</em>, meaning the parsing vendor can be swapped with minimal disruption to the rest of the system.</p>
+
+  <h3>Data Flow at a Glance</h3>
+
+  <div class="flow">
+    <div class="fn">JDs / Profiles<br>/ Taxonomy</div>
+    <div class="fa">→</div>
+    <div class="fn g">Flask<br>App Server</div>
+    <div class="fa">→</div>
+    <div class="fn d">Elasticsearch</div>
+    <div class="fa">→</div>
+    <div class="fn">Search<br>Index</div>
+    <div class="fa">+</div>
+    <div class="fn">Master<br>Data</div>
+    <div class="fa">+</div>
+    <div class="fn">File<br>Storage</div>
+  </div>
+
+  <h3>Elasticsearch as the Primary Database</h3>
+  <p>This is the boldest architectural choice: the platform uses Elasticsearch not as a secondary search layer bolted on top of a relational database, but as the <em>primary database</em>. This works because talent matching is fundamentally a search problem — filtering candidates by skills, matching job descriptions to profiles, and navigating hierarchical taxonomies are all operations that map naturally to Elasticsearch's inverted index and full-text search model.</p>
+
+  <p>The tradeoff is real — ES lacks the transactional guarantees of a relational database — but for a read-heavy, search-intensive workload, the performance and scalability gains far outweigh the cost.</p>
+
+  <div class="ig">
+    <div class="ic">
+      <h4>External Integrations</h4>
+      <ul>
+        <li>LinkedIn</li>
+        <li>Taleo</li>
+        <li>Jobscience</li>
+        <li>Other Sources (Adaptable)</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Parsing &amp; Dashboards</h4>
+      <ul>
+        <li>Sovren Resume/JD Parser</li>
+        <li>Parser Integration (Replaceable)</li>
+        <li>Kibana Dashboards</li>
+        <li>Raw File Storage (Azure Blob)</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Kibana sits on top of Elasticsearch providing analytics dashboards for recruiters and executives. Crucially, raw resume and JD files are kept in separate blob storage — maintaining a clean separation between the processed, indexed representation of a document and the original artifact.</p>
+
+  <div class="div"><div class="div-l"></div><div class="div-t">Deployment</div><div class="div-l"></div></div>
+
+  <!-- §3 -->
+  <h2 id="deployment"><span class="n">03 —</span> Deployment Pipeline</h2>
+
+  <p class="lead" style="font-size:19px;">A three-stage deployment model — Development → Staging → Production — fully containerized with Docker and orchestrated via Azure Kubernetes Service (AKS).</p>
+
+  <figure>
+    <img src="https://www.coderise.io/wp-content/uploads/2023/05/ci-cd-pipeline-kubernetes-docker.png" alt="Docker Kubernetes CI/CD pipeline" onerror="this.style.display='none'"/>
+    <figcaption>▲ Docker-to-Kubernetes CI/CD pipeline: build once, deploy anywhere</figcaption>
+  </figure>
+
+  <h3>Development</h3>
+  <p>Local development uses <strong>Docker Compose</strong> to orchestrate all services — the Flask app, Elasticsearch, and Kibana — in a coordinated local environment. A single <code>docker-compose up</code> replicates the full production topology, eliminating environment drift and dramatically reducing onboarding time for new engineers.</p>
+
+  <h3>Staging → Production via Container Registry</h3>
+  <p>Docker images built during staging are pushed to <strong>Azure Container Registry</strong>. Staging mirrors the production topology at reduced scale, serving as the gate for integration testing and UAT. Promotion to production involves deploying the same container images — no rebuilds, no surprises.</p>
+
+  <h3>Production on AKS</h3>
+  <p>Production runs on <strong>Azure Kubernetes Service</strong> within a VPN/NSG-protected network boundary. Two container groups form the production cluster:</p>
+
+  <div class="ig">
+    <div class="ic">
+      <h4>Elasticsearch Containers</h4>
+      <ul>
+        <li>Multiple ES nodes (horizontally scalable)</li>
+        <li>Kibana on whitelisted IPs only</li>
+        <li>Azure Disk persistent storage</li>
+        <li>VPN/NSG protected boundary</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>API / Frontend Servers</h4>
+      <ul>
+        <li>Flask + uWSGI app containers</li>
+        <li>Nginx as reverse proxy</li>
+        <li>Azure Load Balancer (public-facing)</li>
+        <li>Horizontally scalable replicas</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Elasticsearch is never directly exposed to the internet — only Kibana is accessible externally, and only to whitelisted IPs. API servers face the internet through an <strong>Azure Load Balancer</strong>, distributing traffic across multiple container replicas. This split-exposure model gives the analytics team access to Kibana while keeping the data layer completely private.</p>
+
+  <div class="callout">
+    <p>By containerizing every component — from the app server to Elasticsearch — the platform achieves environment parity across all three deployment stages. What runs locally is exactly what runs in production.</p>
+  </div>
+
+  <div class="div"><div class="div-l"></div><div class="div-t">Security</div><div class="div-l"></div></div>
+
+  <!-- §4 -->
+  <h2 id="auth"><span class="n">04 —</span> Authentication &amp; Security</h2>
+
+  <p class="lead" style="font-size:19px;">The platform supports username/password login and external OAuth (Google, LinkedIn, Facebook), issuing HS256-signed JWT tokens with configurable validity windows.</p>
+
+  <h3>The JWT Flow</h3>
+  <p>When a user authenticates — either directly or through an OAuth provider — the Flask app server validates the credentials and returns a signed JWT token. This token is stored client-side and sent with every subsequent request. The server validates the token on each request; no session state is stored server-side.</p>
+
+  <figure>
+    <img src="https://supertokens.com/static/b0172cabbcd583dd4ed222bdb83fc51a/9af93/jwt-structure.png" alt="JWT token structure" onerror="this.style.display='none'"/>
+    <figcaption>▲ JWT structure: header.payload.signature — a compact, self-contained token</figcaption>
+  </figure>
+
+  <h3>Token Structure</h3>
+  <p>Tokens are signed using <strong>HS256</strong> (HMAC-SHA256) with configurable validity windows. The payload carries four fields: expiration (<code>exp</code>), issued-at (<code>iat</code>), not-before (<code>nbf</code>), and an opaque identity string. Note that the identity field is an opaque ID — not a readable username or email — which avoids leaking PII into client-accessible payloads.</p>
+
+  <div class="code-wrap">
+    <div class="code-label">JWT Payload — Decoded</div>
+    <pre>{
+  <span class="ky">"exp"</span>: <span class="nm">1515044478</span>,   <span class="cm">// token expiration timestamp</span>
+  <span class="ky">"iat"</span>: <span class="nm">1515044178</span>,   <span class="cm">// issued at</span>
+  <span class="ky">"nbf"</span>: <span class="nm">1515044178</span>,   <span class="cm">// not valid before</span>
+  <span class="ky">"identity"</span>: <span class="s">"AWC_qrkjqSWdEnD3N7H_"</span>  <span class="cm">// opaque user ID</span>
+}</pre>
+  </div>
+
+  <h3>External OAuth</h3>
+  <p>OAuth integration for Google, LinkedIn, and Facebook offloads credential management and MFA to trusted identity providers. When external auth is used, the OAuth provider handles the authentication flow; the app server consumes the returned profile data to provision or update the local account and issues its own JWT — maintaining a consistent token model regardless of auth method.</p>
+
+  <div class="div"><div class="div-l"></div><div class="div-t">Stack</div><div class="div-l"></div></div>
+
+  <!-- §5 -->
+  <h2 id="stack"><span class="n">05 —</span> Technology Stack &amp; Configuration</h2>
+
+  <div class="ig">
+    <div class="ic">
+      <h4>Backend</h4>
+      <ul>
+        <li>Python 3.6</li>
+        <li>Flask 0.12.2</li>
+        <li>uWSGI + Nginx</li>
+        <li>Sovren (parsing engine)</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Frontend</h4>
+      <ul>
+        <li>React 16.2.0</li>
+        <li>Single-page application</li>
+        <li>Web + Mobile responsive</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Data Layer</h4>
+      <ul>
+        <li>Elasticsearch 6.1.1</li>
+        <li>Kibana 6.1.1</li>
+        <li>Azure Disk (ES persistence)</li>
+        <li>Azure Blob (file backups)</li>
+      </ul>
+    </div>
+    <div class="ic">
+      <h4>Infrastructure</h4>
+      <ul>
+        <li>Docker + Docker Compose</li>
+        <li>Azure AKS (production)</li>
+        <li>Azure Container Registry</li>
+        <li>Ubuntu 16.04 (Docker host)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>uWSGI + Nginx</h3>
+  <p>Flask isn't production-grade as a standalone server, so the stack uses the battle-tested <strong>uWSGI + Nginx</strong> combination. Nginx handles TLS termination, static file serving, and reverse proxying; uWSGI manages Python application workers. This two-tier web server setup handles significant concurrent load with predictable behavior.</p>
+
+  <h3>Azure Disk vs. Azure Blob</h3>
+  <p>Storage is split by access pattern. Elasticsearch's WAL and index data live on <strong>Azure Disk</strong> (block storage), which provides the low-latency random I/O that ES requires. Raw resume and JD files go to <strong>Azure Blob</strong> — cheaper, geo-redundant object storage optimized for large binary objects. Right tool, right job.</p>
+
+  <div class="div"><div class="div-l"></div><div class="div-t">Takeaways</div><div class="div-l"></div></div>
+
+  <!-- §6 -->
+  <h2 id="takeaways"><span class="n">06 —</span> Key Design Principles</h2>
+
+  <p>Several architectural patterns in this platform are worth carrying forward into your own designs:</p>
+
+  <p><strong>Search-first data modeling.</strong> When your core workload is search — filtering, matching, ranking — consider whether Elasticsearch as your primary store makes more sense than adding it as a secondary layer on top of a relational database. The operational complexity is real, but so are the performance gains.</p>
+
+  <p><strong>Replaceability by design.</strong> Marking integration points as "Replaceable" or "Adaptable" isn't just documentation — it's an architectural contract. It signals to every future engineer that these boundaries are extension points, not implementation details to be coupled against.</p>
+
+  <p><strong>Reusable components as first-class citizens.</strong> Separating reusable components (Taxonomy Manager, Connectors, Profiles) from platform-specific ones means the next product built on this foundation gets those capabilities for free. This is how platforms scale beyond a single product.</p>
+
+  <p><strong>Container-first, environment-parity deployment.</strong> Running Docker Compose locally and AKS in production with the same images isn't just convenient — it eliminates a whole class of "works on my machine" bugs and makes your CI pipeline a genuine quality gate.</p>
+
+  <p><strong>Stateless authentication at scale.</strong> JWT-based auth with configurable validity windows is a clean, horizontally scalable approach. No shared session store means any app server replica can validate any request — essential when running multiple container replicas behind a load balancer.</p>
+
+  <div class="callout">
+    <p>The most interesting architectural bets here are using Elasticsearch as a primary database and containerizing everything from day one. Both are tradeoffs — but for a search-heavy platform deployed on cloud infrastructure, they're the right tradeoffs to make.</p>
+  </div>
+
+  
+</div>
+</body>
+</html>

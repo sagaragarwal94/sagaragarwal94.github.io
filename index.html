@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagar Chand Agarwal — Engineering Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080B10;
+  --bg2: #0D1117;
+  --bg3: #131920;
+  --border: #1E2733;
+  --text: #C9D1D9;
+  --text-dim: #6B7785;
+  --text-bright: #E6EDF3;
+  --gold: #D4A843;
+  --gold2: #F0C060;
+  --blue: #388BFD;
+  --green: #3FB950;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Lora', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  position: fixed; top: 0; left: 0;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(212,168,67,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+body:hover .cursor { opacity: 1; }
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── NAV ──────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(8,11,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--text-dim); }
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* ─── PAGES ─────────────────────────────────── */
+.page {
+  display: none;
+  min-height: 100vh;
+  padding-top: 80px;
+  animation: fadeIn 0.5s ease;
+  position: relative;
+  z-index: 1;
+}
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HOME ─────────────────────────────────── */
+#home {
+  display: none;
+  min-height: 100vh;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+#home.active { display: flex; flex-direction: column; justify-content: center; }
+
+.home-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.home-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  position: relative;
+}
+
+.home-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.home-tag::before {
+  content: '';
+  display: block; width: 40px; height: 1px;
+  background: var(--gold);
+}
+
+.home-name {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+.home-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.home-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  margin-top: 16px;
+}
+
+.home-desc {
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 52px;
+  font-weight: 400;
+}
+
+.home-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+.home-stats {
+  position: absolute;
+  right: 48px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 32px;
+}
+.stat-item {
+  text-align: right;
+  border-right: 2px solid var(--gold);
+  padding-right: 20px;
+  opacity: 0;
+  animation: slideLeft 0.6s ease forwards;
+}
+.stat-item:nth-child(1) { animation-delay: 0.3s; }
+.stat-item:nth-child(2) { animation-delay: 0.5s; }
+.stat-item:nth-child(3) { animation-delay: 0.7s; }
+.stat-item:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px; left: 48px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+}
+.scroll-hint::after {
+  content: '';
+  display: block; width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--text-dim), transparent);
+}
+
+/* ─── ABOUT ─────────────────────────────────── */
+.page-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 48px;
+}
+
+.page-header {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 60px;
+}
+.page-num {
+  font-family: var(--font-mono);
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--border);
+  line-height: 1;
+  user-select: none;
+}
+.page-title-block h2 {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+.page-title-block p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.about-text p strong {
+  color: var(--text-bright);
+  font-weight: 500;
+}
+
+.about-sidebar {}
+
+.profile-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.profile-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.profile-initials {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--gold) 0%, #8B5E1A 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bg);
+  margin-bottom: 20px;
+}
+.profile-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.profile-role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.profile-links {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.profile-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  transition: color 0.2s;
+}
+.profile-link:hover { color: var(--gold); }
+.profile-link .link-icon { opacity: 0.6; font-size: 13px; }
+
+.skills-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 28px;
+}
+.skills-card h4 {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  transition: all 0.2s;
+}
+.skill-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── EXPERIENCE ─────────────────────────────── */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--border), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -38px; top: 6px;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 3px rgba(212,168,67,0.2);
+}
+.timeline-dot.current {
+  background: var(--gold2);
+  box-shadow: 0 0 0 5px rgba(212,168,67,0.15), 0 0 20px rgba(212,168,67,0.3);
+}
+
+.timeline-period {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.timeline-role {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.timeline-company {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--blue);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.timeline-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.timeline-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.timeline-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+}
+
+/* ─── BLOG ───────────────────────────────────── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.blog-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.blog-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.blog-card:hover { border-color: rgba(212,168,67,0.3); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.blog-card:hover::after { width: 100%; }
+
+.blog-card-img {
+  height: 140px;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.blog-card-img .code-bg {
+  position: absolute; inset: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(56,139,253,0.08);
+  padding: 12px;
+  line-height: 1.6;
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+}
+
+.blog-card-body { padding: 24px; }
+.blog-card-cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.blog-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.blog-card-excerpt {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.blog-card-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.blog-card-meta .read-more {
+  color: var(--gold);
+  transition: gap 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.blog-card:hover .read-more { gap: 8px; }
+
+a.blog-card { text-decoration: none; color: inherit; display: block; }
+
+.back-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 48px;
+  transition: gap 0.2s;
+  padding: 0;
+}
+.back-btn:hover { gap: 14px; }
+
+.post-header { margin-bottom: 48px; }
+.post-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.post-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.post-title em { font-style: italic; color: var(--gold); }
+.post-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  display: flex; gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-content {
+  max-width: 680px;
+}
+.post-content h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--text-bright);
+  margin: 40px 0 16px;
+}
+.post-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.post-content strong { color: var(--text-bright); }
+.post-content code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--bg3);
+  color: var(--blue);
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+}
+.post-content pre {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.post-content blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 16px 24px;
+  margin: 28px 0;
+  background: var(--bg2);
+  font-style: italic;
+  color: var(--text-dim);
+}
+.post-content ul {
+  margin: 16px 0 20px 20px;
+}
+.post-content ul li {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 8px;
+  list-style: none;
+  padding-left: 16px;
+  position: relative;
+}
+.post-content ul li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: var(--gold);
+  font-size: 11px;
+  top: 4px;
+}
+
+/* ─── CONTACT ─────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+.contact-intro p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.contact-links {
+  display: flex; flex-direction: column; gap: 16px;
+  margin-top: 36px;
+}
+.contact-link-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.contact-link-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transition: transform 0.2s;
+}
+.contact-link-item:hover { border-color: rgba(212,168,67,0.3); }
+.contact-link-item:hover::before { transform: scaleY(1); }
+.contact-link-icon { font-size: 20px; }
+.contact-link-text {}
+.contact-link-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.contact-link-value {
+  font-size: 14px;
+  color: var(--text-bright);
+  margin-top: 2px;
+}
+
+.contact-form {}
+.form-field {
+  margin-bottom: 20px;
+}
+.form-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+.form-field input:focus,
+.form-field textarea:focus { border-color: var(--gold); }
+.form-field textarea { height: 120px; }
+
+.form-success {
+  display: none;
+  background: rgba(63,185,80,0.1);
+  border: 1px solid var(--green);
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--green);
+  letter-spacing: 1px;
+  margin-top: 16px;
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+footer p {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+.footer-links {
+  display: flex; gap: 24px;
+}
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 20px; }
+  .home-content { padding: 40px 24px; }
+  .home-stats { display: none; }
+  .page-inner { padding: 40px 24px; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+    Sagar Chand Agarwal<span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="showPage('experience')" id="nav-experience">Experience</a></li>
+    <li><a href="#" onclick="showPage('blog')" id="nav-blog">Blog</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HOME ══════════════════════════════════ -->
+<div id="home" class="page active">
+  <div class="home-grid-bg"></div>
+  <div class="home-content">
+    <div class="home-tag">Engineering Leader · Hyderabad, India</div>
+    <div class="home-name">Sagar<br><em>Chand</em><br>Agarwal</div>
+    <div class="home-title">// CTO · BeyondIRR · Fintech Platform Architect</div>
+    <p class="home-desc">Building high-performance fintech platforms, AI-powered systems, and engineering teams that scale. Currently driving 5× platform growth as CTO at BeyondIRR.</p>
+    <div class="home-ctas">
+      <button class="btn-primary" onclick="showPage('about')">About Me</button>
+      <button class="btn-ghost" onclick="showPage('blog')">Read Blog</button>
+      <button class="btn-ghost" onclick="showPage('contact')">Get in Touch</button>
+    </div>
+  </div>
+  <div class="home-stats">
+    <div class="stat-item">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">15</div>
+      <div class="stat-label">Engineers Led</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5×</div>
+      <div class="stat-label">Growth</div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</div>
+
+<!-- ══ ABOUT ══════════════════════════════════ -->
+<div id="about" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="page-num">01</div>
+      <div class="page-title-block">
+        <h2>About Me</h2>
+        <p>Engineering leader · Builder · Mentor</p>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a <strong>technology leader</strong> with 8+ years building fintech platforms, scaling engineering teams, and shipping products that move the needle on real business outcomes.</p>
+        <p>Currently serving as <strong>CTO at BeyondIRR</strong>, a Hyderabad-based wealth management fintech, where I've grown the engineering team from 2 to 15, architected multi-cloud infrastructure across AWS, GCP, and Azure, and shipped an LLM-powered AI portfolio assistant that changed how our clients interact with their investments.</p>
+        <p>My engineering philosophy: <strong>systems should be simple at the boundaries, powerful at the core</strong>. I believe the best engineering orgs are built on psychological safety, clear ownership, and a relentless focus on delivery over process.</p>
+        <p>Outside of work I write about <strong>distributed systems, fintech architecture, and engineering leadership</strong>. I'm deeply interested in how AI is reshaping financial services — and how to build teams that can harness it responsibly.</p>
+        <p>I hold an <strong>M.S. in Machine Learning & AI</strong> from Liverpool John Moores University and have built everything from real-time trading pipelines to AI chatbots in production.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="profile-card">
+          <div class="profile-initials">SA</div>
+          <div class="profile-name">Sagar Chand Agarwal</div>
+          <div class="profile-role">CTO · BeyondIRR</div>
+          <div class="profile-links">
+            <a href="mailto:atomsagar@gmail.com" class="profile-link">
+              <span class="link-icon">✉</span> atomsagar@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/sagarchandagarwal" target="_blank" class="profile-link">
+              <span class="link-icon">🔗</span> linkedin.com/in/sagarchandagarwal
+            </a>
+            <a href="https://github.com/sagaragarwal94" target="_blank" class="profile-link">
+              <span class="link-icon">⌥</span> github.com/sagaragarwal94
+            </a>
+            <a class="profile-link">
+              <span class="link-icon">📍</span> Hyderabad, Telangana, India
+            </a>
+          </div>
+        </div>
+        <div class="skills-card">
+          <h4>Core Skills</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Microservices</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">LLMs</span>
+            <span class="skill-tag">Agentic AI</span>
+            <span class="skill-tag">ETL Pipelines</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">ISO 27001</span>
+            <span class="skill-tag">Team Scaling</span>
+            <span class="skill-tag">Kafka</span>
+            <span class="skill-tag">Elasticsearch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXPERIENCE ══════════════════════════════ -->
+<div id="experience" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="page-num">02</div>
+      <div class="page-title-block">
+        <h2>Experience</h2>
+        <p>8+ years · Fintech · Enterprise · AI</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot current"></div>
+        <div class="timeline-period">Jan 2024 – Present</div>
+        <div class="timeline-role">Chief Technology Officer</div>
+        <div class="timeline-company">BeyondIRR · Hyderabad, India</div>
+        <div class="timeline-desc">Leading technology strategy and execution for a wealth management fintech. Scaled the engineering team from 2 to 15, architected multi-cloud infrastructure (AWS, GCP, Azure) achieving 99.9% uptime, and shipped LLM-powered AI systems for portfolio management. Drove ₹2+ Cr in new business through technical leadership. Led ISO 27001 compliance, VAPT assessments, and full DPDP Act adherence.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Python</span><span class="timeline-tag">Multi-cloud</span>
+          <span class="timeline-tag">LLMs</span><span class="timeline-tag">ETL Pipelines</span>
+          <span class="timeline-tag">ISO 27001</span><span class="timeline-tag">Team Leadership</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Apr 2022 – Dec 2023</div>
+        <div class="timeline-role">Software Engineering Team Lead</div>
+        <div class="timeline-company">BeyondIRR · Hyderabad, India</div>
+        <div class="timeline-desc">Led development of InvestLane — a multi-sector investment management platform. Built high-performance FastAPI microservices backend with real-time mutual fund data pipelines. Established CI/CD standards, code review practices, and engineering best practices that became the foundation of the team's culture.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">FastAPI</span><span class="timeline-tag">Microservices</span>
+          <span class="timeline-tag">CI/CD</span><span class="timeline-tag">Real-time Pipelines</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Dec 2019 – Feb 2021</div>
+        <div class="timeline-role">Senior Software Consultant</div>
+        <div class="timeline-company">Team8 Solutions LLC · Hyderabad, India</div>
+        <div class="timeline-desc">Designed and built a full-cycle recruitment platform for the energy sector. Implemented resume parsing (Sovren), skill taxonomy-based job matching, and candidate search using PostgreSQL and Elasticsearch. Deployed the full stack on Kubernetes.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Kubernetes</span><span class="timeline-tag">Elasticsearch</span>
+          <span class="timeline-tag">PostgreSQL</span><span class="timeline-tag">Resume Parsing</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Mar 2018 – Dec 2019</div>
+        <div class="timeline-role">Software Engineer</div>
+        <div class="timeline-company">TECHSOPHY · Hyderabad, India</div>
+        <div class="timeline-desc">Built full-stack features on the TXP enterprise platform using Node.js and Python. Developed a Rasa NLU-powered AI chatbot for conversational automation integrated with real-time backend systems. Automated deployment workflows with CI/CD pipelines in a cloud-native environment.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Node.js</span><span class="timeline-tag">Python</span>
+          <span class="timeline-tag">Rasa NLU</span><span class="timeline-tag">Chatbot</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jul 2017 – Feb 2018</div>
+        <div class="timeline-role">Software Engineer</div>
+        <div class="timeline-company">GrabOn + Upwork · Hyderabad, India</div>
+        <div class="timeline-desc">Led development of BestPriceOn, a price comparison engine, building backend APIs with Flask and MongoDB and scraping pipelines for e-commerce data. Also built a real estate property search platform with map visualizations (Leaflet.js), improving page load times by 40% and organic traffic by 28%.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Flask</span><span class="timeline-tag">MongoDB</span>
+          <span class="timeline-tag">Leaflet.js</span><span class="timeline-tag">SEO</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
+      <div style="font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;">Education</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <div style="background: var(--bg2); border: 1px solid var(--border); padding: 20px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent);"></div>
+          <div style="font-family: var(--font-mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px;">2020 – 2022</div>
+          <div style="font-family: var(--font-display); font-size: 15px; color: var(--text-bright); margin-bottom: 4px; font-weight: 700;">M.S. ML & AI</div>
+          <div style="font-size: 12px; color: var(--text-dim);">Liverpool John Moores University</div>
+        </div>
+        <div style="background: var(--bg2); border: 1px solid var(--border); padding: 20px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent);"></div>
+          <div style="font-family: var(--font-mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px;">2020 – 2021</div>
+          <div style="font-family: var(--font-display); font-size: 15px; color: var(--text-bright); margin-bottom: 4px; font-weight: 700;">PG Diploma ML & AI</div>
+          <div style="font-size: 12px; color: var(--text-dim);">IIIT Bangalore</div>
+        </div>
+        <div style="background: var(--bg2); border: 1px solid var(--border); padding: 20px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), transparent);"></div>
+          <div style="font-family: var(--font-mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px;">2013 – 2017</div>
+          <div style="font-family: var(--font-display); font-size: 15px; color: var(--text-bright); margin-bottom: 4px; font-weight: 700;">B.Tech. Computer & Comms</div>
+          <div style="font-size: 12px; color: var(--text-dim);">LNMIIT Jaipur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BLOG ══════════════════════════════════ -->
+<div id="blog" class="page">
+  <div class="page-inner">
+    <div id="blog-list-view">
+      <div class="page-header">
+        <div class="page-num">03</div>
+        <div class="page-title-block">
+          <h2>Writing</h2>
+          <p>Thoughts on engineering, AI & leadership</p>
+        </div>
+      </div>
+
+      <div class="blog-grid">
+        <a class="blog-card" href="blogs/financial-etl-pipelines.html">
+          <div class="blog-card-img">
+            <div class="code-bg">def process_portfolio(data):
+  pipeline = ETLPipeline()
+  pipeline.ingest(data)
+  return pipeline.transform()
+
+# 10GB+ daily
+class FinancialETL:
+  def __init__(self):
+    self.sources = []</div>
+            🏗️
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Architecture</div>
+            <div class="blog-card-title">Building Financial ETL Pipelines That Don't Break at 3AM</div>
+            <div class="blog-card-excerpt">How we process 10GB+ of financial data daily at BeyondIRR — design decisions, failure modes, and the lessons we learned the hard way.</div>
+            <div class="blog-card-meta">
+              <span>Feb 2025 · 8 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/llm-agents-fintech.html">
+          <div class="blog-card-img">
+            <div class="code-bg">class AgentOrchestrator:
+  def __init__(self, llm):
+    self.llm = llm
+    self.tools = []
+  
+  def run(self, query):
+    plan = self.llm.plan(query)
+    return self.execute(plan)</div>
+            🤖
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">AI / LLMs</div>
+            <div class="blog-card-title">LLM Agents in Fintech: What Actually Works in Production</div>
+            <div class="blog-card-excerpt">We shipped an agentic AI chatbot for portfolio management. Here's what the papers don't tell you about running LLMs in a regulated financial environment.</div>
+            <div class="blog-card-meta">
+              <span>Jan 2025 · 11 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/recruitment-platform.html">
+          <div class="blog-card-img">
+            <div class="code-bg">layers = [
+  "Channels",
+  "App Services",
+  "Shared Services",
+  "Infrastructure",
+]
+# Kubernetes · Postgres
+# Elasticsearch · Redis</div>
+            🔍
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">System Design</div>
+            <div class="blog-card-title">Building a Modern Talent Intelligence Platform</div>
+            <div class="blog-card-excerpt">A complete architectural deep dive — layers, deployment, auth, and the full tech stack behind a production-grade recruitment platform.</div>
+            <div class="blog-card-meta">
+              <span>Mar 2025 · 8 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/scaling-eng-team.html">
+          <div class="blog-card-img">
+            <div class="code-bg">// Team growth: 2 → 15
+// Hiring principle #1:
+// Hire for judgment,
+// not just skills.
+
+const hiringBar = {
+  judgment: 'critical',
+  curiosity: 'required',
+  skills: 'coachable'
+}</div>
+            👥
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Engineering Leadership</div>
+            <div class="blog-card-title">Scaling an Eng Team from 2 to 15: The Mistakes I Made</div>
+            <div class="blog-card-excerpt">Going from a scrappy 2-person team to a 15-person org is not just about hiring. It's about letting go, building systems, and learning when to stay out of the way.</div>
+            <div class="blog-card-meta">
+              <span>Dec 2024 · 9 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/multi-cloud-setup.html">
+          <div class="blog-card-img">
+            <div class="code-bg">resource "aws_s3_bucket" "data" {
+  bucket = "beyondirr-data"
+  tags = {
+    Environment = "prod"
+    Compliance  = "ISO27001"
+  }
+}
+
+# 99.9% uptime target</div>
+            ☁️
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Cloud Infrastructure</div>
+            <div class="blog-card-title">Multi-cloud Without the Chaos: Our AWS + GCP + Azure Setup</div>
+            <div class="blog-card-excerpt">Why we chose multi-cloud, how we avoid vendor lock-in, and the architecture patterns that keep our fintech platform running at 99.9% uptime.</div>
+            <div class="blog-card-meta">
+              <span>Nov 2024 · 7 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/iso-27001-startups.html">
+          <div class="blog-card-img">
+            <div class="code-bg">// ISO 27001 Audit Prep
+// 114 controls
+// 12 months to certify
+// Zero surprises
+
+const security = {
+  vapt: 'quarterly',
+  access: 'zero-trust',
+  logs: 'immutable'
+}</div>
+            🔐
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Security</div>
+            <div class="blog-card-title">ISO 27001 for Startups: A CTO's Survival Guide</div>
+            <div class="blog-card-excerpt">We got ISO 27001 certified as a 15-person fintech. No expensive consultants. Here's the exact process, the tools we used, and what we'd do differently.</div>
+            <div class="blog-card-meta">
+              <span>Oct 2024 · 12 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/portfolio-nav-database.html">
+          <div class="blog-card-img">
+            <div class="code-bg">SELECT 
+  portfolio_id,
+  SUM(value) as nav,
+  LAG(nav) OVER (
+    PARTITION BY portfolio_id
+    ORDER BY date
+  ) as prev_nav
+FROM holdings
+GROUP BY 1, date</div>
+            📊
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Fintech</div>
+            <div class="blog-card-title">Real-time Portfolio NAV: The Database Design That Scaled</div>
+            <div class="blog-card-excerpt">Portfolio valuation sounds simple until you're doing it for thousands of clients with complex instruments in real time. Here's the schema and query design that made it work.</div>
+            <div class="blog-card-meta">
+              <span>Sep 2024 · 10 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="blogs/recruitment-platform.html">
+          <div class="blog-card-img">
+            <div class="code-bg">layers = [
+  "Channels",
+  "App Services",
+  "Shared Services",
+  "Infrastructure", ]
+# Kubernetes · Postgres
+# Elasticsearch · Redis</div>
+            🏢
+            </div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">System Design</div>
+            <div class="blog-card-title">Building a Modern Talent Intelligence Platform</div>
+            <div class="blog-card-excerpt">A complete architectural deep dive — layers, deployment
+, auth, and the full tech stack behind a production-grade recruitment platform.</div>
+            <div class="blog-card-meta">
+              <span>Mar 2025 · 8 min</span>
+              <span class="read-more">Read →</span>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ CONTACT ══════════════════════════════════ -->
+<div id="contact" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <div class="page-num">04</div>
+      <div class="page-title-block">
+        <h2>Contact</h2>
+        <p>Let's build something great</p>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-intro">
+        <p>I'm always open to interesting conversations — whether that's about <strong>engineering leadership, fintech architecture, AI systems</strong>, or a new role that looks like an interesting challenge.</p>
+        <p>The best way to reach me is email. I respond within 24 hours on weekdays.</p>
+
+        <div class="contact-links">
+          <a href="mailto:atomsagar@gmail.com" class="contact-link-item">
+            <span class="contact-link-icon">✉</span>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">atomsagar@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/sagarchandagarwal" target="_blank" class="contact-link-item">
+            <span class="contact-link-icon">🔗</span>
+            <div class="contact-link-text">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">linkedin.com/in/sagarchandagarwal</div>
+            </div>
+          </a>
+          <a href="https://github.com/sagaragarwal94" target="_blank" class="contact-link-item">
+            <span class="contact-link-icon">⌥</span>
+            <div class="contact-link-text">
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">github.com/sagaragarwal94</div>
+            </div>
+          </a>
+          <a class="contact-link-item">
+            <span class="contact-link-icon">📍</span>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Location</div>
+              <div class="contact-link-value">Hyderabad, Telangana, India</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" id="form-name" placeholder="Jane Smith">
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" id="form-email" placeholder="jane@company.com">
+        </div>
+        <div class="form-field">
+          <label>Subject</label>
+          <input type="text" id="form-subject" placeholder="Collaboration / Opportunity / Just saying hi">
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea id="form-message" placeholder="Tell me what's on your mind..."></textarea>
+        </div>
+        <button class="btn-primary" onclick="submitForm()" style="width:100%">Send Message</button>
+        <div class="form-success" id="form-success">
+          ✓ &nbsp; Message sent! I'll get back to you within 24 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Sagar Chand Agarwal · Built with ☕ and obsessive attention to detail</p>
+  <div class="footer-links">
+    <a href="mailto:atomsagar@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sagarchandagarwal" target="_blank">LinkedIn</a>
+    <a href="https://github.com/sagaragarwal94" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a, button, .blog-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width = '10px'; cursor.style.height = '10px'; });
+});
+
+// Page routing
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  location.hash = id;
+}
+
+// Hash routing on load
+(function() {
+  const hash = location.hash.replace('#', '');
+  const valid = ['home','about','experience','blog','contact'];
+  if (hash && valid.includes(hash)) {
+    showPage(hash);
+  }
+})();
+
+// Contact form
+function submitForm() {
+  const name = document.getElementById('form-name').value;
+  const email = document.getElementById('form-email').value;
+  if (!name || !email) { alert('Please fill in your name and email.'); return; }
+  document.getElementById('form-success').style.display = 'block';
+  document.getElementById('form-name').value = '';
+  document.getElementById('form-email').value = '';
+  document.getElementById('form-subject').value = '';
+  document.getElementById('form-message').value = '';
+  setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+}
+
+// Prevent default on nav links
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+</script>
+</body>
+</html>
