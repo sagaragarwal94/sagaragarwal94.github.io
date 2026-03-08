@@ -225,9 +225,21 @@ footer p {
 }
 .footer-links a:hover { color: var(--gold); }
 @media (max-width: 768px) {
-  nav { padding: 16px 24px; }
-  .post-page { padding: 100px 20px 60px; }
-  footer { flex-direction: column; gap: 16px; }
+  nav { padding: 16px 20px; }
+  .nav-logo { font-size: 11px; letter-spacing: 1px; }
+  .nav-back { font-size: 10px; letter-spacing: 1px; }
+  .post-page { padding: 90px 20px 60px; }
+  .post-title { font-size: clamp(26px, 6vw, 52px); }
+  .post-meta-row { flex-wrap: wrap; gap: 10px; }
+  .post-content pre { padding: 16px; font-size: 11px; overflow-x: auto; }
+  .post-content blockquote { padding: 12px 16px; }
+  footer { flex-direction: column; gap: 16px; padding: 24px 20px; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .post-content p { font-size: 15px; }
+  .post-content h3 { font-size: 20px; }
+  .post-content ul li { font-size: 15px; }
 }
 </style>
 </head>
