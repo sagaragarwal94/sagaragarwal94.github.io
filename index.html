@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sagar Chand Agarwal — Engineering Leader</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
 :root {
   --bg: #080B10;
@@ -21,6 +22,22 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'Lora', Georgia, serif;
+  --nav-bg: rgba(8,11,16,0.85);
+}
+
+[data-theme="light"] {
+  --bg: #F5F4EF;
+  --bg2: #EDEDEA;
+  --bg3: #E3E3DE;
+  --border: #C8C8C0;
+  --text: #3C3C3C;
+  --text-dim: #88887F;
+  --text-bright: #1A1A1A;
+  --gold: #B07D00;
+  --gold2: #C99400;
+  --blue: #0969DA;
+  --green: #1A7F37;
+  --nav-bg: rgba(245,244,239,0.93);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,6 +65,7 @@ body {
   transition: width 0.2s, height 0.2s, background 0.2s;
   mix-blend-mode: screen;
 }
+[data-theme="light"] .cursor { mix-blend-mode: difference; }
 .cursor-ring {
   position: fixed; top: 0; left: 0;
   width: 36px; height: 36px;
@@ -76,7 +94,7 @@ nav {
   z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
-  background: rgba(8,11,16,0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -113,6 +131,26 @@ nav {
 }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 15px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.theme-toggle:hover { color: var(--gold); border-color: var(--gold); }
 
 /* ─── PAGES ─────────────────────────────────── */
 .page {
@@ -843,6 +881,7 @@ footer p {
     <li><a href="#" onclick="showPage('blog')" id="nav-blog">Blog</a></li>
     <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">☀</button>
 </nav>
 
 <!-- ══ HOME ══════════════════════════════════ -->
@@ -1389,6 +1428,20 @@ function submitForm() {
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', e => e.preventDefault());
 });
+
+// Theme toggle
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeToggle').textContent = next === 'dark' ? '☀' : '☾';
+}
+(function() {
+  const t = document.documentElement.getAttribute('data-theme') || 'dark';
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '☀' : '☾';
+})();
 </script>
 </body>
 </html>

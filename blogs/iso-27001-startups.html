@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ISO 27001 for Startups: A CTO's Survival Guide — Sagar Chand Agarwal</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
 :root {
   --bg: #080B10;
@@ -21,6 +22,21 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'Lora', Georgia, serif;
+  --nav-bg: rgba(8,11,16,0.85);
+}
+[data-theme="light"] {
+  --bg: #F5F4EF;
+  --bg2: #EDEDEA;
+  --bg3: #E3E3DE;
+  --border: #C8C8C0;
+  --text: #3C3C3C;
+  --text-dim: #88887F;
+  --text-bright: #1A1A1A;
+  --gold: #B07D00;
+  --gold2: #C99400;
+  --blue: #0969DA;
+  --green: #1A7F37;
+  --nav-bg: rgba(245,244,239,0.93);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -44,7 +60,7 @@ nav {
   z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 48px;
-  background: rgba(8,11,16,0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -66,6 +82,23 @@ nav {
   transition: color 0.2s;
 }
 .nav-back:hover { color: var(--gold); }
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 15px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+.theme-toggle:hover { color: var(--gold); border-color: var(--gold); }
 .post-page {
   max-width: 740px;
   margin: 0 auto;
@@ -202,6 +235,7 @@ footer p {
 <nav>
   <a href="index.html" class="nav-logo">Sagar Chand Agarwal<span></span></a>
   <a href="index.html#blog" class="nav-back">← Writing</a>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">☀</button>
 </nav>
 
 <div class="post-page">
@@ -242,5 +276,19 @@ footer p {
     <a href="https://github.com/atomsagar" target="_blank">GitHub</a>
   </div>
 </footer>
+<script>
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeToggle').textContent = next === 'dark' ? '☀' : '☾';
+}
+(function() {
+  const t = document.documentElement.getAttribute('data-theme') || 'dark';
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '☀' : '☾';
+})();
+</script>
 </body>
 </html>

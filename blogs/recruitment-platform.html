@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Building a Modern Talent Intelligence Platform — A System Architecture Deep Dive</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 <style>
   :root {
     --ink: #111111;
@@ -17,6 +18,51 @@
     --code-bg: #16201a;
     --max: 740px;
   }
+
+  [data-theme="dark"] {
+    --ink: #C9D1D9;
+    --bg: #0D1117;
+    --accent: #3FB950;
+    --accent-light: #0D2B1A;
+    --accent2: #F0793C;
+    --muted: #8B949E;
+    --rule: #21262D;
+    --code-bg: #161B22;
+  }
+  [data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+  [data-theme="dark"] .cover-preview { background: #020409; }
+  [data-theme="dark"] .arch,
+  [data-theme="dark"] .ic,
+  [data-theme="dark"] .fn:not(.g):not(.d) { background: #161B22; border-color: var(--rule); }
+  [data-theme="dark"] .ic li { border-color: var(--rule); color: var(--ink); }
+  [data-theme="dark"] .badge:not(.g):not(.d) { background: #21262D; border-color: var(--rule); color: var(--ink); }
+  [data-theme="dark"] .lr-inner:not(.hi) { background: #161B22; border-color: var(--rule); }
+  [data-theme="dark"] h2 { border-color: var(--rule); color: var(--ink); }
+  [data-theme="dark"] h3, [data-theme="dark"] .lead { color: var(--ink); }
+  [data-theme="dark"] .export-section { background: #161B22; border-color: var(--rule); }
+
+  .theme-toggle-float {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, border-color 0.2s, background 0.3s;
+    padding: 0;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .theme-toggle-float:hover { color: var(--accent); border-color: var(--accent); }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -439,6 +485,7 @@
 </style>
 </head>
 <body>
+<button class="theme-toggle-float" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">☀</button>
 
 
 
@@ -742,4 +789,18 @@
   
 </div>
 </body>
+<script>
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeToggle').textContent = next === 'dark' ? '☀' : '☾';
+}
+(function() {
+  const t = document.documentElement.getAttribute('data-theme') || 'dark';
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = t === 'dark' ? '☀' : '☾';
+})();
+</script>
 </html>
