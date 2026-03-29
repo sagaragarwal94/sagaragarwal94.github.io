@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — LocalSpend</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1c1c1e;
+      background: #f2f2f7;
+    }
+
+    header {
+      background: #0a1932;
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    header .badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: #007aff;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+    }
+
+    header .meta {
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .callout {
+      background: #e8f4ff;
+      border-left: 4px solid #007aff;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 32px auto 0;
+      max-width: 780px;
+      font-size: 15px;
+    }
+
+    .callout strong { color: #007aff; }
+
+    main {
+      max-width: 780px;
+      margin: 32px auto 64px;
+      padding: 0 24px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a1932;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0f0f5;
+    }
+
+    h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1c1c1e;
+      margin: 20px 0 8px;
+    }
+
+    h3:first-of-type { margin-top: 0; }
+
+    p { margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    ul li { margin-bottom: 5px; }
+
+    code {
+      background: #f0f0f5;
+      color: #d63d6e;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #007aff;
+    }
+
+    .no-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .no-list li::before {
+      content: "✗ ";
+      color: #ff3b30;
+      font-weight: 700;
+    }
+
+    .yes-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .yes-list li::before {
+      content: "✓ ";
+      color: #34c759;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    thead tr {
+      background: #f0f0f5;
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #8e8e93;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-top: 1px solid #f0f0f5;
+      color: #1c1c1e;
+    }
+
+    td:last-child { color: #34c759; font-weight: 600; }
+
+    .contact-links a {
+      color: #007aff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-links a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #8e8e93;
+    }
+
+    footer a { color: #007aff; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>LocalSpend</h1>
+  <div class="badge">Privacy Policy</div>
+  <p class="meta">Effective Date: 29 March 2026 &nbsp;·&nbsp; Last Updated: 29 March 2026</p>
+</header>
+
+<main>
+
+  <div class="callout">
+    <strong>Short version:</strong> All processing happens on your device. No data ever leaves your phone.
+    There is no server, no account, and no analytics.
+  </div>
+
+  <!-- Overview -->
+  <section>
+    <h2>Overview</h2>
+    <p>
+      LocalSpend is a private, offline expense tracker for Android. It reads payment SMS messages
+      on your device to automatically log UPI and bank transactions. We are committed to protecting
+      your privacy. This policy explains what data the app accesses, how it is used, and what is
+      never done with it.
+    </p>
+  </section>
+
+  <!-- Data We Access -->
+  <section>
+    <h2>1. Data We Access</h2>
+
+    <h3>SMS Messages (<code>READ_SMS</code> permission)</h3>
+    <p>LocalSpend requests the <code>READ_SMS</code> permission to read payment-related messages from your inbox. Specifically, the app:</p>
+    <ul>
+      <li>Reads message body text from known bank and payment app senders (e.g., HDFC, SBI, ICICI, Google Pay, PhonePe, Paytm)</li>
+      <li>Extracts transaction amount, merchant name, payment method, and reference ID using on-device pattern matching</li>
+      <li>Stores only the extracted fields (amount, merchant, category, timestamp) in a local SQLite database on your device</li>
+      <li>Optionally stores the raw message body locally so you can review the source message — this is never transmitted</li>
+    </ul>
+    <p>The app does <strong>not</strong> read personal messages, OTPs, or any SMS content other than financial transaction alerts.</p>
+
+    <h3>Biometric Data (<code>USE_BIOMETRIC</code> / <code>USE_FINGERPRINT</code> permission)</h3>
+    <p>
+      LocalSpend uses Android's biometric API to lock the app. The app does <strong>not</strong> access,
+      store, or transmit your biometric data. Authentication is handled entirely by the Android operating system.
+    </p>
+
+    <h3>Storage</h3>
+    <p>
+      The app writes a local SQLite database (<code>localspend.db</code>) to your device's internal app storage.
+      This file is private to the app and is not accessible by other apps.
+    </p>
+  </section>
+
+  <!-- Data We Do Not Collect -->
+  <section>
+    <h2>2. Data We Do Not Collect</h2>
+    <ul class="no-list">
+      <li>No account or registration is required</li>
+      <li>No personal information (name, email, phone number) is collected</li>
+      <li>No location data is accessed</li>
+      <li>No contacts are read</li>
+      <li>No camera or microphone access</li>
+      <li>No advertising identifiers</li>
+      <li>No crash reporting or analytics SDKs</li>
+      <li>No third-party SDKs that collect data</li>
+    </ul>
+  </section>
+
+  <!-- Data Sharing -->
+  <section>
+    <h2>3. Data Sharing</h2>
+    <p>
+      <span class="highlight">We share nothing.</span> LocalSpend does not transmit any data to any server,
+      third party, or analytics platform — because there is no network connection made by the app for data purposes.
+    </p>
+    <p>Your transaction data stays on your device and is only accessible to you through the LocalSpend app.</p>
+  </section>
+
+  <!-- Storage and Security -->
+  <section>
+    <h2>4. Data Storage and Security</h2>
+    <p>
+      All data is stored locally in a SQLite database within the app's private internal storage on your
+      Android device. The database uses WAL (Write-Ahead Logging) mode for integrity.
+    </p>
+    <p>Data is protected by:</p>
+    <ul class="yes-list">
+      <li>Android's app sandbox (other apps cannot access LocalSpend's storage)</li>
+      <li>Biometric authentication gate before the app opens</li>
+      <li>No network endpoints to attack</li>
+    </ul>
+  </section>
+
+  <!-- Data Retention -->
+  <section>
+    <h2>5. Data Retention and Deletion</h2>
+    <ul>
+      <li>You can delete individual transactions by swiping left on any transaction</li>
+      <li>You can delete all app data at any time via <strong>Android Settings → Apps → LocalSpend → Clear Data</strong></li>
+      <li>Uninstalling the app permanently deletes all locally stored data</li>
+    </ul>
+  </section>
+
+  <!-- Children -->
+  <section>
+    <h2>6. Children's Privacy</h2>
+    <p>
+      LocalSpend does not knowingly collect any information from children under the age of 13.
+      The app is intended for general audiences managing personal finances.
+    </p>
+  </section>
+
+  <!-- Changes -->
+  <section>
+    <h2>7. Changes to This Policy</h2>
+    <p>
+      If we update this Privacy Policy, the new version will be published at this URL with an updated
+      <strong>Last Updated</strong> date. Continued use of the app after changes constitutes acceptance
+      of the updated policy.
+    </p>
+  </section>
+
+  <!-- Your Rights -->
+  <section>
+    <h2>8. Your Rights</h2>
+    <p>
+      Since LocalSpend stores no data on any server, there is nothing for us to retrieve, correct, or
+      delete on your behalf. All your data is on your own device and under your full control at all times.
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section>
+    <h2>9. Contact</h2>
+    <p>If you have any questions about this Privacy Policy, please contact:</p>
+    <p class="contact-links">
+      <strong>Email:</strong> <a href="mailto:hello@sagarchandagarwal.com">hello@sagarchandagarwal.com</a><br />
+    </p>
+  </section>
+
+  <!-- Permissions Table -->
+  <section>
+    <h2>10. Permissions Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Purpose</th>
+          <th>Data Transmitted?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>READ_SMS</code></td>
+          <td>Read bank/UPI payment SMS to auto-log transactions</td>
+          <td>No — on-device only</td>
+        </tr>
+        <tr>
+          <td><code>RECEIVE_SMS</code></td>
+          <td>Listen for new payment SMS in real time</td>
+          <td>No — on-device only</td>
+        </tr>
+        <tr>
+          <td><code>USE_BIOMETRIC</code></td>
+          <td>Lock app behind fingerprint/Face unlock</td>
+          <td>No — handled by OS</td>
+        </tr>
+        <tr>
+          <td><code>USE_FINGERPRINT</code></td>
+          <td>Fallback biometric support</td>
+          <td>No — handled by OS</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <p style="margin-top:8px;">© 2026 LocalSpend. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
