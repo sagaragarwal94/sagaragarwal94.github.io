@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streaks — Daily Habit & Streak Tracker</title>
+  <meta name="description" content="Build habits that stick. Track streaks, log your mood, and stay consistent with smart reminders — free, private, beautifully designed for iOS and Android." />
+  <meta property="og:title" content="Streaks — Daily Habit & Streak Tracker" />
+  <meta property="og:description" content="Build habits that stick. Free, private, no account required." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #6C63FF;
+      --primary-light: #EEE BFF;
+      --primary-glow: rgba(108,99,255,0.15);
+      --text: #0f0f1a;
+      --text-muted: #6b7280;
+      --surface: #ffffff;
+      --surface-2: #f5f3ff;
+      --border: rgba(108,99,255,0.12);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo span.icon { font-size: 24px; }
+    .nav-logo span.name { font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 50px; font-size: 14px;
+      font-weight: 600; text-decoration: none; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-ghost { color: var(--text-muted); background: transparent; }
+    .btn-ghost:hover { color: var(--primary); }
+    .btn-primary {
+      background: var(--primary); color: white;
+      box-shadow: 0 4px 16px rgba(108,99,255,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(108,99,255,0.45); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 120px 24px 80px;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(108,99,255,0.12) 0%, transparent 70%),
+                  linear-gradient(180deg, #f5f3ff 0%, #ffffff 60%);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 16px; border-radius: 50px;
+      background: rgba(108,99,255,0.1); color: var(--primary);
+      font-size: 13px; font-weight: 600; margin-bottom: 24px;
+      border: 1px solid rgba(108,99,255,0.2);
+    }
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 900; letter-spacing: -2px; line-height: 1.05;
+      max-width: 800px; margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--primary), #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px); color: var(--text-muted);
+      max-width: 560px; margin: 0 auto 40px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; border-radius: 16px; font-size: 15px;
+      font-weight: 700; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-store:hover { transform: translateY(-2px); }
+    .btn-store-dark {
+      background: #0f0f1a; color: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn-store-dark:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .btn-store-light {
+      background: white; color: #0f0f1a;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .btn-store-light:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.14); }
+    .store-icon { font-size: 22px; }
+    .store-label { display: flex; flex-direction: column; text-align: left; line-height: 1.1; }
+    .store-label small { font-size: 10px; font-weight: 500; opacity: 0.65; letter-spacing: 0.3px; }
+
+    /* ── SOCIAL PROOF ── */
+    .tagline-row {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 28px;
+      margin-top: 48px; font-size: 13px; color: var(--text-muted);
+    }
+    .tagline-row span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── PHONE MOCKUP ── */
+    .mockup-section {
+      padding: 0 24px 100px;
+      display: flex; justify-content: center;
+    }
+    .phone-shell {
+      width: 280px; height: 560px; border-radius: 44px;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0d1b3e 100%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 40px 80px rgba(108,99,255,0.2),
+        0 20px 40px rgba(0,0,0,0.3);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .phone-notch {
+      width: 100px; height: 28px; background: #0a0a14;
+      border-radius: 0 0 20px 20px; margin-top: 0; z-index: 2;
+    }
+    .phone-screen {
+      flex: 1; width: 100%; padding: 16px 14px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .phone-header { color: white; font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
+    .phone-sub { color: rgba(255,255,255,0.45); font-size: 11px; }
+    .phone-card {
+      border-radius: 16px; padding: 12px 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .phone-card .emoji { font-size: 22px; }
+    .phone-card-body { flex: 1; }
+    .phone-card-name { color: white; font-size: 13px; font-weight: 600; }
+    .phone-card-sub { color: rgba(255,255,255,0.4); font-size: 10px; margin-top: 2px; }
+    .phone-card-streak {
+      font-size: 13px; font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .phone-dot-row { display: flex; gap: 4px; margin-top: 3px; }
+    .phone-dot {
+      width: 12px; height: 12px; border-radius: 3px;
+      background: rgba(108,99,255,0.5);
+    }
+    .phone-dot.filled { background: #6C63FF; }
+    .phone-check {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .phone-check.done { background: rgba(108,99,255,0.25); }
+    .phone-check.pending { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.15); }
+
+    /* ── FEATURES ── */
+    section { padding: 100px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--primary); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px); font-weight: 900;
+      letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px;
+    }
+    .section-desc { font-size: 17px; color: var(--text-muted); max-width: 520px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px; margin-top: 60px;
+    }
+    .feature-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--primary-glow);
+    }
+    .feature-icon { font-size: 32px; margin-bottom: 14px; }
+    .feature-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--surface-2); }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 60px; max-width: 640px; }
+    .step { display: flex; gap: 24px; padding-bottom: 40px; position: relative; }
+    .step:not(:last-child)::after {
+      content: ''; position: absolute; left: 23px; top: 52px; bottom: 0;
+      width: 2px; background: linear-gradient(180deg, var(--primary) 0%, transparent 100%);
+      opacity: 0.15;
+    }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), #a78bfa);
+      color: white; font-weight: 800; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(108,99,255,0.35);
+    }
+    .step-body { padding-top: 10px; }
+    .step-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .step-desc { font-size: 15px; color: var(--text-muted); }
+
+    /* ── WHY FREE ── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px; margin-top: 60px;
+    }
+    .why-card {
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: 24px; text-align: center;
+    }
+    .why-card .icon { font-size: 28px; margin-bottom: 10px; }
+    .why-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .why-card p { font-size: 13px; color: var(--text-muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center; padding: 100px 24px 120px;
+      background: radial-gradient(ellipse 70% 80% at 50% 100%, rgba(108,99,255,0.1) 0%, transparent 70%);
+    }
+    .cta-section h2 { font-size: clamp(28px, 5vw, 56px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .cta-section p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--primary); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links .btn-ghost { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="icon">🔥</span>
+      <span class="name">Streaks</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="btn btn-ghost">Features</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+      <!-- <a href="#download" class="btn btn-primary">Download free</a> -->
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">🚀 Now on iOS &amp; Android (Coming Soon)</div>
+    <h1>Build habits that<br /><em>actually stick.</em></h1>
+    <p>Streaks is a science-backed habit tracker that turns daily wins into momentum. Track streaks, log your mood, and stay consistent — completely free, forever.</p>
+    <div class="hero-ctas" id="download">
+      <a href="https://apps.apple.com/us/app/streaks-track-reflect-improve/id6761472324" class="btn-store btn-store-dark">
+        <span class="store-icon">🍎</span>
+        <span class="store-label">
+          <small>Download on the</small>
+          App Store
+        </span>
+      </a>
+      <!-- <a href="#" class="btn-store btn-store-light">
+        <span class="store-icon">▶</span>
+        <span class="store-label">
+          <small>Get it on</small>
+          Google Play (Coming Soon)
+        </span>
+      </a> -->
+    </div>
+    <div class="tagline-row">
+      <span>✅ Completely free</span>
+      <span>🔒 No account required</span>
+      <span>📴 Fully offline</span>
+      <span>🚫 No ads, ever</span>
+    </div>
+  </section>
+
+  <!-- PHONE MOCKUP -->
+  <div class="mockup-section">
+    <div class="phone-shell">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div>
+          <div class="phone-header">Today's Habits</div>
+          <div class="phone-sub" style="margin-top:2px">Monday · 3 of 5 done 🔥</div>
+        </div>
+        <div class="phone-card">
+          <div class="emoji">🧘</div>
+          <div class="phone-card-body">
+            <div class="phone-card-name">Morning Meditation</div>
+            <div class="phone-dot-row">
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot"></div>
+            </div>
+          </div>
+          <div class="phone-check done">✓</div>
+        </div>
+        <div class="phone-card">
+          <div class="emoji">📚</div>
+          <div class="phone-card-body">
+            <div class="phone-card-name">Read 20 pages</div>
+            <div class="phone-dot-row">
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot filled"></div><div class="phone-dot"></div>
+              <div class="phone-dot"></div><div class="phone-dot"></div>
+              <div class="phone-dot"></div>
+            </div>
+          </div>
+          <div class="phone-check done">✓</div>
+        </div>
+        <div class="phone-card">
+          <div class="emoji">💪</div>
+          <div class="phone-card-body">
+            <div class="phone-card-name">Workout</div>
+            <div class="phone-dot-row">
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot"></div><div class="phone-dot"></div>
+              <div class="phone-dot"></div><div class="phone-dot"></div>
+              <div class="phone-dot"></div>
+            </div>
+          </div>
+          <div class="phone-check pending"></div>
+        </div>
+        <div class="phone-card">
+          <div class="emoji">💧</div>
+          <div class="phone-card-body">
+            <div class="phone-card-name">Drink 2L Water</div>
+            <div class="phone-dot-row">
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot filled"></div><div class="phone-dot filled"></div>
+              <div class="phone-dot filled"></div><div class="phone-dot"></div>
+              <div class="phone-dot"></div>
+            </div>
+          </div>
+          <div class="phone-check done">✓</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px;padding: 0 2px;">
+          <div style="color:rgba(255,255,255,0.35);font-size:11px;">Current streak</div>
+          <div class="phone-card-streak">21 days 🔥</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-inner">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Everything you need.<br />Nothing you don't.</h2>
+      <p class="section-desc">Built around behavioral science, Streaks keeps things simple so you actually use it every day.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <div class="feature-title">Streak Tracking</div>
+          <div class="feature-desc">Visual flame streaks that grow with your consistency. Current streak, longest streak, and total completions — all at a glance.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">😊</div>
+          <div class="feature-title">Mood Logging</div>
+          <div class="feature-desc">Rate how you feel on a 5-point scale with every check-in. Spot patterns between your habits and your mood over time.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-title">Smart Reminders</div>
+          <div class="feature-desc">Per-habit daily notifications at your chosen time. Optional early heads-up 15 or 30 minutes before, and a streak-risk alert in the evening.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Progress Charts</div>
+          <div class="feature-desc">7-day completion bar charts, per-habit heatmaps, and an advanced metrics view with day-of-week breakdowns and completion rates.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏅</div>
+          <div class="feature-title">Badge System</div>
+          <div class="feature-desc">Earn tiered emoji badges as your streak grows — from Seedling 🌱 all the way to Diamond 💎. Unlock them, keep them forever.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗓️</div>
+          <div class="feature-title">Flexible Schedules</div>
+          <div class="feature-desc">Set habits for every day, specific weekdays, or a weekly target of 1–7 days. Not all habits need to be daily.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">100% Private</div>
+          <div class="feature-desc">All your data lives on your device. No login, no cloud sync, no tracking. Export and import a local JSON backup whenever you like.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <div class="feature-title">Beautiful Design</div>
+          <div class="feature-desc">Liquid Glass interface on iOS with a frosted gradient backdrop. Full Material 3 dark mode on Android. Fast, focused, distraction-free.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="how-section">
+    <div class="section-inner">
+      <span class="section-label">How it works</span>
+      <h2 class="section-title">Up and running<br />in under a minute.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Create a habit</div>
+            <div class="step-desc">Pick an emoji, choose a color, set your schedule and reminder time. Done in seconds.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Check in daily</div>
+            <div class="step-desc">Tap to complete. Optionally log your mood and a quick note about how it went.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Watch your streak grow</div>
+            <div class="step-desc">Your flame grows every day you stay consistent. The longer the chain, the more you'll want to protect it.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Understand your patterns</div>
+            <div class="step-desc">Review your progress in the Stats and Advanced Metrics screens. See which days you're strongest and where to improve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY FREE -->
+  <section>
+    <div class="section-inner" style="text-align:center">
+      <span class="section-label">Why free?</span>
+      <h2 class="section-title" style="margin:0 auto 16px">Built for people,<br />not for profit.</h2>
+      <p class="section-desc" style="margin:0 auto 0">We believe the tools that help you become a better version of yourself should never be locked behind a paywall.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="icon">🚫</div>
+          <h3>No paywalls</h3>
+          <p>Every feature is free. No premium tier. No "unlock with Pro".</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">🔕</div>
+          <h3>No ads</h3>
+          <p>Your focus is sacred. We will never show you an advertisement.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">👤</div>
+          <h3>No account</h3>
+          <p>Download and start immediately. No email, no sign-up, no password.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">📴</div>
+          <h3>Works offline</h3>
+          <p>No internet required. Ever. Your habits don't depend on a server.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <h2>Start your streak<br /><em style="font-style:normal;background:linear-gradient(135deg,var(--primary),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">today.</em></h2>
+      <p>Free forever. No account. No excuses.</p>
+      <div class="hero-ctas">
+        <a href="https://apps.apple.com/us/app/streaks-track-reflect-improve/id6761472324" class="btn-store btn-store-dark">
+          <span class="store-icon">🍎</span>
+          <span class="store-label">
+            <small>Download on the</small>
+            App Store
+          </span>
+        </a>
+        <!-- <a href="#" class="btn-store btn-store-light">
+          <span class="store-icon">▶</span>
+          <span class="store-label">
+            <small>Get it on</small>
+            Google Play (Coming Soon)
+          </span>
+        </a> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>🔥 Streaks · Daily Habit Tracker</span>
+    <span style="display:flex;gap:24px">
+      <a href="privacy_policy.html">Privacy Policy</a>
+    </span>
+    <span>© 2026 Streaks</span>
+  </footer>
+
+</body>
+</html>
