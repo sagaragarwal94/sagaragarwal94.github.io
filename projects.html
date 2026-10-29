@@ -4,70 +4,189 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Sagar Chand Agarwal</title>
+<meta name="description" content="Apps and open-source tools by Sagar Chand Agarwal: Streaks, LocalSpend, Sky Voyage, NutriTrack, Gravel, AppShots, Home TV, plus platform work at BeyondIRR.">
+<meta name="author" content="Sagar Chand Agarwal">
+<link rel="canonical" href="https://sagarchandagarwal.com/projects.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Sagar Chand Agarwal — Writing" href="https://sagarchandagarwal.com/feed.xml">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sagar Chand Agarwal">
+<meta property="og:title" content="Projects — Sagar Chand Agarwal">
+<meta property="og:description" content="Apps and open-source tools by Sagar Chand Agarwal: Streaks, LocalSpend, Sky Voyage, NutriTrack, Gravel, AppShots, Home TV, plus platform work at BeyondIRR.">
+<meta property="og:url" content="https://sagarchandagarwal.com/projects.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Projects — Sagar Chand Agarwal">
+<meta name="twitter:description" content="Apps and open-source tools by Sagar Chand Agarwal: Streaks, LocalSpend, Sky Voyage, NutriTrack, Gravel, AppShots, Home TV, plus platform work at BeyondIRR.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>(function(){ document.documentElement.dataset.theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); })();</script>
+<script>(function(){ var t; try { t = localStorage.getItem('theme'); } catch(e) {} document.documentElement.dataset.theme = t || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); })();</script>
 </head>
 <body>
-
-<header>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
   <div class="header-inner">
-    <a class="header-left" href="index.html">
+    <a class="header-left" href="index.html" aria-label="Home">
       <div class="avatar">SA</div>
       <span class="header-name">Sagar Chand Agarwal</span>
     </a>
     <div class="header-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="about.html"      onclick="closeNav()">About</a></li>
-        <li><a href="experience.html" onclick="closeNav()">Experience</a></li>
-        <li><a href="projects.html"   class="active" onclick="closeNav()">Projects</a></li>
-        <li><a href="writing.html"    onclick="closeNav()">Writing</a></li>
-        <li><a href="contact.html"    onclick="closeNav()">Contact</a></li>
-      </ul>
+      <nav aria-label="Primary">
+        <ul class="nav-links" id="navLinks">
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
       <button class="theme-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀</button>
-      <button class="nav-ham" id="navHam" aria-label="Menu" onclick="toggleNav()">
+      <button class="nav-ham" id="navHam" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="wrap">
 
     <section>
-      <div class="s-label">Projects · <a href="https://portfolio.ltd" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">portfolio.ltd ↗</a></div>
-
+      <div class="s-label"><span>Apps · <a href="https://portfolio.ltd" target="_blank" rel="noopener">portfolio.ltd ↗</a></span></div>
+      <p class="s-intro">Small, private, offline-first apps built under my studio. No accounts, no ads, no analytics phoning home. Each one has a public privacy policy and, where the store listing is live, a link to it.</p>
       <div class="projects-grid">
-        <a href="https://portfolio.ltd" target="_blank" class="proj-card">
-          <div class="proj-header"><span class="proj-name">Streaks</span><span class="proj-arrow">↗</span></div>
-          <div class="proj-desc">Daily habit &amp; streak tracker with mood logging. Free, private, offline-first — no account required.</div>
-          <div class="proj-status"><span class="dot dot-live"></span> Live on App Store</div>
-        </a>
-        <a href="https://portfolio.ltd" target="_blank" class="proj-card">
-          <div class="proj-header"><span class="proj-name">LocalSpend</span><span class="proj-arrow">↗</span></div>
-          <div class="proj-desc">Privacy-first expense tracker. Reads SMS payment notifications entirely offline — no data leaves your device.</div>
-          <div class="proj-status"><span class="dot dot-test"></span> Closed Testing (Android)</div>
-        </a>
-        <a href="https://portfolio.ltd" target="_blank" class="proj-card">
-          <div class="proj-header"><span class="proj-name">Sky Voyage</span><span class="proj-arrow">↗</span></div>
-          <div class="proj-desc">Arcade runner game with hot air balloon mechanics. Simple controls, satisfying physics.</div>
-          <div class="proj-status"><span class="dot dot-test"></span> Closed Testing</div>
-        </a>
-        <a href="https://portfolio.ltd" target="_blank" class="proj-card">
-          <div class="proj-header"><span class="proj-name">NutriTrack</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">🔥</span>Streaks</span><span class="proj-platforms"><span class="plat">iOS</span></span></div>
+          <div class="proj-desc">Daily habit and streak tracker with mood logging and smart reminders. Free, private, offline-first, no account required.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-live"></span> Live on the App Store</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://apps.apple.com/us/app/streaks-track-reflect-improve/id6761472324" target="_blank" rel="noopener">App Store ↗</a><a class="proj-link" href="apps/streaks/index.html">Landing page</a><a class="proj-link" href="apps/streaks/privacy_policy.html">Privacy</a><a class="proj-link" href="https://github.com/portfolio-ltd/streaks" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">💸</span>LocalSpend</span><span class="proj-platforms"><span class="plat">Android</span><span class="plat">Flutter</span></span></div>
+          <div class="proj-desc">Privacy-first expense tracker. Reads payment SMS notifications entirely on-device; no data ever leaves your phone.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-test"></span> Closed testing · Android</span></div>
+          <div class="proj-links"><a class="proj-link" href="apps/localspend/privacy_policy.html">Privacy</a><a class="proj-link" href="https://github.com/portfolio-ltd/localspend" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">🎈</span>Sky Voyage</span><span class="proj-platforms"><span class="plat">Android</span><span class="plat">Kotlin</span></span></div>
+          <div class="proj-desc">Arcade runner with hot-air-balloon mechanics. Simple controls, satisfying physics, no ads in the way of the fun.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-test"></span> Closed testing · Android</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://play.google.com/store/apps/details?id=com.skyvoyage" target="_blank" rel="noopener">Google Play ↗</a><a class="proj-link" href="apps/skyvoyage/privacy_policy.html">Privacy</a><a class="proj-link" href="https://github.com/portfolio-ltd/skyvoyage" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">🥗</span>NutriTrack</span><span class="proj-platforms"><span class="plat">iOS</span><span class="plat">Swift</span></span></div>
           <div class="proj-desc">Gamified nutrition tracker for iOS 17+. No subscription, no ads, no data collection.</div>
-          <div class="proj-status"><span class="dot dot-dev"></span> In Development</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-dev"></span> In development</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://github.com/portfolio-ltd/nutritrack" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="s-label">Tools &amp; open source</div>
+      <p class="s-intro">Developer tools I built because I needed them. All source is public.</p>
+      <div class="projects-grid">
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">⛏️</span>Gravel</span><span class="proj-platforms"><span class="plat">Python</span><span class="plat">FastAPI</span><span class="plat">Next.js</span></span></div>
+          <div class="proj-desc">Open-source, spec-driven AI engineering. PRDs and GitHub issues in; analyzed specs, reviewed plans and verified PRs out, with a human approving every gate. Apache-2.0.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-live"></span> Open source · Apache-2.0</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://github.com/portfolio-ltd/gravel" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">📱</span>AppShots</span><span class="proj-platforms"><span class="plat">TypeScript</span><span class="plat">Next.js</span></span></div>
+          <div class="proj-desc">Store-ready App Store and Google Play screenshots, made in your browser. Device frames, exact store sizes, nothing uploaded.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-live"></span> Live · open source</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://appshots.portfolio.ltd" target="_blank" rel="noopener">Open app ↗</a><a class="proj-link" href="https://github.com/portfolio-ltd/appshots" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">🧾</span>Audit SaaS</span><span class="proj-platforms"><span class="plat">JavaScript</span></span></div>
+          <div class="proj-desc">Run a SaaS audit locally and track every project in beta. A small tool for keeping side projects honest.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-test"></span> Beta</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://auditsaas.org" target="_blank" rel="noopener">Website ↗</a><a class="proj-link" href="https://github.com/sagaragarwal94/audit-saas" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-header"><span class="proj-name"><span class="proj-emoji" aria-hidden="true">📺</span>Home TV</span><span class="proj-platforms"><span class="plat">JavaScript</span><span class="plat">Android TV</span></span></div>
+          <div class="proj-desc">Apple TV-style home screen for Android TV: no ads, no recommendations, just your apps, wallpaper, clock and weather. MIT.</div>
+          <div class="proj-foot"><span class="proj-status"><span class="dot dot-live"></span> Open source · MIT</span></div>
+          <div class="proj-links"><a class="proj-link" href="https://github.com/sagaragarwal94/home-tv" target="_blank" rel="noopener">Source ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="s-label">Work highlights · BeyondIRR</div>
+      <p class="s-intro">Systems I architected or led as engineering lead and CTO. Longer write-ups of several of these are on the <a class="inline-link" href="writing.html">writing page</a>.</p>
+      <div class="case-list">
+        <div class="case">
+          <h3>Multi-tenant portfolio platform</h3>
+          <div class="case-metric">10K+<small>clients</small></div>
+          <p>Isolated per-enterprise stacks on AWS, Azure and Kubernetes, one codebase. Tenant isolation, per-client data residency and a deployment pipeline that made the ninth enterprise rollout routine.</p>
+          <div class="exp-tags"><span class="exp-tag">Kubernetes</span><span class="exp-tag">AWS</span><span class="exp-tag">Azure</span><span class="exp-tag">PostgreSQL</span></div>
+        </div>
+        <div class="case">
+          <h3>Agentic AI for financial insights</h3>
+          <div class="case-metric">3–4s<small>end-to-end</small></div>
+          <p>Multi-agent orchestration over real portfolio data with read-only tools, numeric output validation and automatic regulatory disclaimers. Latency cut from 12–18s to 3–4s.</p>
+          <div class="exp-tags"><span class="exp-tag">Pydantic AI</span><span class="exp-tag">FastAPI</span><span class="exp-tag">PgVector</span></div>
+        </div>
+        <div class="case">
+          <h3>Analytics backend rebuild</h3>
+          <div class="case-metric">8s → 400ms<small>API latency</small></div>
+          <p>Rebuilt the InvestLane core analytics API and the NAV calculation ETL. Incremental valuation instead of nightly recompute.</p>
+          <div class="exp-tags"><span class="exp-tag">FastAPI</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">ETL</span></div>
+        </div>
+        <div class="case">
+          <h3>ISO 27001 + DPDP compliance</h3>
+          <div class="case-metric">114<small>controls</small></div>
+          <p>Took a 15-person fintech through certification without a large consultant engagement: controls mapped to engineering practice, evidence automated where it could be.</p>
+          <div class="exp-tags"><span class="exp-tag">ISO 27001</span><span class="exp-tag">DPDP</span><span class="exp-tag">DevOps</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="s-label">On GitHub</div>
+      <div class="repo-list">
+        <a class="repo" href="https://github.com/sagaragarwal94/python_rest_flask" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">python_rest_flask</span><span class="repo-stars"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.446l-7.416 3.967 1.48-8.279L0 9.306l8.332-1.151z"/></svg> 190</span></div>
+          <div class="repo-desc">A small, well-starred reference for building REST APIs with Flask and SQLite. Forked hundreds of times as a starting point.</div>
+          <div class="repo-meta"><span class="lang" style="--c:#3572A5">Python</span><span>sagaragarwal94/python_rest_flask</span></div>
+        </a>
+        <a class="repo" href="https://github.com/portfolio-ltd/gravel" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">gravel</span></div>
+          <div class="repo-desc">Spec-driven AI engineering with human gates: analyze → spec → plan → build → review → verify.</div>
+          <div class="repo-meta"><span class="lang" style="--c:#3572A5">Python</span><span>portfolio-ltd/gravel</span></div>
+        </a>
+        <a class="repo" href="https://github.com/portfolio-ltd/appshots" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">appshots</span></div>
+          <div class="repo-desc">Browser-only App Store / Google Play screenshot builder with device frames.</div>
+          <div class="repo-meta"><span class="lang" style="--c:#3178c6">TypeScript</span><span>portfolio-ltd/appshots</span></div>
+        </a>
+        <a class="repo" href="https://github.com/sagaragarwal94/home-tv" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">home-tv</span></div>
+          <div class="repo-desc">Minimal Android TV launcher: apps, wallpaper, clock, weather. Nothing else.</div>
+          <div class="repo-meta"><span class="lang" style="--c:#f1e05a">JavaScript</span><span>sagaragarwal94/home-tv</span></div>
+        </a>
+        <a class="repo" href="https://github.com/portfolio-ltd/streaks" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">streaks</span></div>
+          <div class="repo-desc">Source for the Streaks habit tracker (iOS).</div>
+          <div class="repo-meta"><span class="lang" style="--c:#F05138">Swift</span><span>portfolio-ltd/streaks</span></div>
+        </a>
+        <a class="repo" href="https://github.com/sagaragarwal94/flask-site-builder" target="_blank" rel="noopener">
+          <div class="repo-top"><span class="repo-name">flask-site-builder</span></div>
+          <div class="repo-desc">Flask extension that generates a one-page website.</div>
+          <div class="repo-meta"><span class="lang" style="--c:#3572A5">Python</span><span>sagaragarwal94/flask-site-builder</span></div>
         </a>
       </div>
-
-      <a href="https://github.com/sagaragarwal94" target="_blank" class="gh-card">
+      <a href="https://github.com/sagaragarwal94" target="_blank" rel="noopener" class="gh-card mt-16">
         <div class="gh-left">
-          <svg class="gh-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <span class="gh-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span>
           <div>
             <div class="gh-title">github.com/sagaragarwal94</div>
-            <div class="gh-meta">187 followers · Arctic Code Vault Contributor · 3× GSoC</div>
+            <div class="gh-meta">188 followers · Arctic Code Vault contributor · 3× GSoC · org: portfolio-ltd</div>
           </div>
         </div>
         <span class="gh-arrow">↗</span>
@@ -77,23 +196,56 @@
   </div>
 </main>
 
-<footer>
+<footer class="site">
   <div class="footer-inner">
-    <span class="footer-copy">© 2026 Sagar Chand Agarwal</span>
-    <div class="footer-icons">
-      <a href="https://github.com/sagaragarwal94" target="_blank" class="f-icon" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-      <a href="https://linkedin.com/in/sagarchandagarwal" target="_blank" class="f-icon" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      <a href="mailto:atomsagar@gmail.com" class="f-icon" title="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <span class="header-name">Sagar Chand Agarwal</span>
+        <p>Backend &amp; platform engineer. Former CTO. Building privacy-first apps at portfolio.ltd from Hyderabad, India.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="writing.html">Writing</a></li>
+          <li><a href="now.html">Now</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Recent writing</h4>
+        <ul>
+          <li><a href="blogs/recruitment-platform.html">Building a Modern Talent Intelligence Platform</a></li>
+          <li><a href="blogs/financial-etl-pipelines.html">Building Financial ETL Pipelines That Don&#x27;t Break at 3AM</a></li>
+          <li><a href="blogs/llm-agents-fintech.html">LLM Agents in Fintech: What Actually Works in Production</a></li>
+          <li><a href="feed.xml">RSS feed</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://github.com/sagaragarwal94" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/sagarchandagarwal" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://portfolio.ltd" target="_blank" rel="noopener">portfolio.ltd</a></li>
+          <li><a href="mailto:atomsagar@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span data-year>2026</span> Sagar Chand Agarwal · Hyderabad, India</span>
+      <div class="footer-icons">
+        <a href="https://github.com/sagaragarwal94" target="_blank" rel="noopener" class="f-icon" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+        <a href="https://linkedin.com/in/sagarchandagarwal" target="_blank" rel="noopener" class="f-icon" title="LinkedIn" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://portfolio.ltd" target="_blank" rel="noopener" class="f-icon" title="portfolio.ltd" aria-label="portfolio.ltd"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        <a href="feed.xml" class="f-icon" title="RSS" aria-label="RSS feed"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg></a>
+        <a href="mailto:atomsagar@gmail.com" class="f-icon" title="Email" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
     </div>
   </div>
 </footer>
-
-<script>
-(function(){ var t = document.documentElement.dataset.theme || 'dark'; document.getElementById('themeBtn').textContent = t === 'dark' ? '☀' : '☾'; })();
-document.getElementById('themeBtn').addEventListener('click', function(){ var t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = t; localStorage.setItem('theme', t); document.getElementById('themeBtn').textContent = t === 'dark' ? '☀' : '☾'; });
-function toggleNav(){ document.getElementById('navLinks').classList.toggle('open'); }
-function closeNav(){ document.getElementById('navLinks').classList.remove('open'); }
-document.addEventListener('click', function(e){ var n = document.getElementById('navLinks'), h = document.getElementById('navHam'); if (n && n.classList.contains('open') && !n.contains(e.target) && h && !h.contains(e.target)) n.classList.remove('open'); });
-</script>
+<script src="site.js"></script>
 </body>
 </html>

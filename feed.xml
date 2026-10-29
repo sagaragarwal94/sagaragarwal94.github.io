@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sagar Chand Agarwal — Writing</title>
+    <link>https://sagarchandagarwal.com/writing.html</link>
+    <atom:link href="https://sagarchandagarwal.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Essays on fintech architecture, LLM agents in production, cloud infrastructure and engineering leadership.</description>
+    <language>en</language>
+    <lastBuildDate>Sat, 15 Mar 2025 09:00:00 +0530</lastBuildDate>
+    <item>
+      <title>Building a Modern Talent Intelligence Platform</title>
+      <link>https://sagarchandagarwal.com/blogs/recruitment-platform.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/recruitment-platform.html</guid>
+      <pubDate>Sat, 15 Mar 2025 09:00:00 +0530</pubDate>
+      <category>System Design</category>
+      <description>What the architecture of a production-grade talent platform actually looks like, layer by layer — from user-facing channels to containerized cloud infrastructure.</description>
+    </item>
+    <item>
+      <title>Building Financial ETL Pipelines That Don&#x27;t Break at 3AM</title>
+      <link>https://sagarchandagarwal.com/blogs/financial-etl-pipelines.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/financial-etl-pipelines.html</guid>
+      <pubDate>Sat, 15 Feb 2025 09:00:00 +0530</pubDate>
+      <category>Architecture</category>
+      <description>Two years of lessons from ingesting 10GB+ of financial data daily — NAVs, prices, yields, corporate actions — including the failures we would rather forget.</description>
+    </item>
+    <item>
+      <title>LLM Agents in Fintech: What Actually Works in Production</title>
+      <link>https://sagarchandagarwal.com/blogs/llm-agents-fintech.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/llm-agents-fintech.html</guid>
+      <pubDate>Wed, 15 Jan 2025 09:00:00 +0530</pubDate>
+      <category>AI / LLMs</category>
+      <description>Shipping an agentic portfolio assistant without hallucinated numbers, DPDP violations or accidental investment advice. Guardrails, latency and what survived contact with clients.</description>
+    </item>
+    <item>
+      <title>Scaling an Eng Team from 2 to 15: The Mistakes I Made</title>
+      <link>https://sagarchandagarwal.com/blogs/scaling-eng-team.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/scaling-eng-team.html</guid>
+      <pubDate>Sun, 15 Dec 2024 09:00:00 +0530</pubDate>
+      <category>Leadership</category>
+      <description>What nobody tells you about going from two engineers to fifteen: hiring for judgment over skills, ownership, and the things I would do differently.</description>
+    </item>
+    <item>
+      <title>Multi-cloud Without the Chaos: Our AWS + GCP + Azure Setup</title>
+      <link>https://sagarchandagarwal.com/blogs/multi-cloud-setup.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/multi-cloud-setup.html</guid>
+      <pubDate>Fri, 15 Nov 2024 09:00:00 +0530</pubDate>
+      <category>Cloud</category>
+      <description>Most advice says pick one cloud and go deep. We run three. Why that was the right call for us, and the patterns that keep it manageable.</description>
+    </item>
+    <item>
+      <title>ISO 27001 for Startups: A CTO&#x27;s Survival Guide</title>
+      <link>https://sagarchandagarwal.com/blogs/iso-27001-startups.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/iso-27001-startups.html</guid>
+      <pubDate>Tue, 15 Oct 2024 09:00:00 +0530</pubDate>
+      <category>Security</category>
+      <description>How a 15-person fintech got certified without a six-figure consultant engagement — what the 114 controls actually demand, and what to automate.</description>
+    </item>
+    <item>
+      <title>Real-time Portfolio NAV: The Database Design That Scaled</title>
+      <link>https://sagarchandagarwal.com/blogs/portfolio-nav-database.html</link>
+      <guid isPermaLink="true">https://sagarchandagarwal.com/blogs/portfolio-nav-database.html</guid>
+      <pubDate>Sun, 15 Sep 2024 09:00:00 +0530</pubDate>
+      <category>Fintech</category>
+      <description>Portfolio valuation looks like units × NAV. In practice it is corporate actions, FX, accrued income and XIRR for thousands of clients, updated continuously.</description>
+    </item>
+  </channel>
+</rss>
