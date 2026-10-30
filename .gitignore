@@ -33,3 +33,6 @@ venv/
 # OS
 Thumbs.db
 ehthumbs.db
+
+# Personal, never publish (LinkedIn export PDF + profile brief)
+linkedin-export/
